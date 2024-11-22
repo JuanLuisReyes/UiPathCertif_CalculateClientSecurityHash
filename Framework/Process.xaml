@@ -126,7 +126,7 @@
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_ClientID">[in_TransactionItem("WIID").ToString]</InArgument>
-        <InArgument x:TypeArguments="scg:List(x:String)" x:Key="out_ClientDetails">[clientDetails]</InArgument>
+        <OutArgument x:TypeArguments="scg:List(x:String)" x:Key="out_ClientDetails">[clientDetails]</OutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
     <Assign DisplayName="Assign text to hash" sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_1">
@@ -134,7 +134,7 @@
         <OutArgument x:TypeArguments="x:String">[textToHash]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[String.Format("{0}-{1}", clientDetails(0), clientDetails(2))]</InArgument>
+        <InArgument x:TypeArguments="x:String">[String.Format("{0}-{1}-{2}", clientDetails(0), clientDetails(1), clientDetails(2))]</InArgument>
       </Assign.Value>
     </Assign>
     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="getSecurityHash - Invoke Workflow File (Common\ACME\getSecurityHash.xaml)" sap:VirtualizedContainerService.HintSize="434,177" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Common\ACME\getSecurityHash.xaml">
@@ -148,6 +148,7 @@
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_ClientID">[in_TransactionItem("WIID").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Comment">[secureHash]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
   </Sequence>
